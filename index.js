@@ -48,7 +48,15 @@ async function run() {
     })
 
 
+  // get the single user
 
+  app.get('/users/:email',async (req,res)=>{
+
+    const email = req.params.email 
+    const query = {email:email}
+    const result = await usersCollection.findOne(query)
+    res.send(result)
+  })
     
    // Get all the rooms 
 
@@ -56,6 +64,18 @@ async function run() {
     const result = await roomsCollection.find().toArray()
     res.send(result)
    })
+
+
+  //Get a single room
+  
+  app.get('/room/:id',async(req,res)=>{
+    const id= req.params.id 
+    const query = {_id: new ObjectId(id)}
+    const result = await roomsCollection.findOne(query)
+    res.send(result)
+  })
+
+
    //Save room in the database 
 
    app.post('/rooms',async (req,res)=>{
