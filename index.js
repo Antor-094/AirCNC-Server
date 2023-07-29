@@ -47,6 +47,15 @@ async function run() {
         res.send(result)
     })
 
+
+
+    
+   // Get all the rooms 
+
+   app.get('/rooms',async (req,res)=>{
+    const result = await roomsCollection.find().toArray()
+    res.send(result)
+   })
    //Save room in the database 
 
    app.post('/rooms',async (req,res)=>{
@@ -56,6 +65,8 @@ async function run() {
        const result = await roomsCollection.insertOne(room)
        res.send(result)
    })
+
+
     // Send a ping to confirm a successful connection
     await client.db('admin').command({ ping: 1 })
     console.log(
